@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  	<title>作业</title>
+      <meta charset="UTF-8">
+      <style>
+            fieldset{
+                width: 500px; 
+            }
+            legend{
+                color: red;
+            }
+            .font{
+                color:red;
+            }
+        </style>
+</head>
+<body>
+    <form action="#">
+        <header>
+            <h1>毕业生信息</h1>
+        </header>
+        <fieldset>
+            <legend>
+                 学生信息
+            </legend>
+            姓名<input  type="text"  name="name" required="true" placeholder="请输入姓名"/>
+            <font class="font">*</font>
+            <br>
+            学号<input  type="number"  name="num" min="1"step="1" required="true" placeholder="请输入学号"/>
+            <font class="font">*</font>
+            <br>
+            手机<input type="tel"  placeholder="输入电话" name="phone" required="true" placeholder="请输入手机号"/> 
+            <font class="font">*</font>
+            <br>
+            邮箱<input  type="email"  name="email" placeholder="请输入邮箱"  required="true"/>
+            <font class="font">*</font>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>
+                录取情况
+            </legend>
+            录取学校<input type= "search"  name="school" list="sc"/>
+            <datalist id="sc">
+                <option></option>
+                <option>河北师范大学</option>
+                <option>河北传媒大学</option>
+                <option>河北地质大学</option>
+                <option>北京师范大学</option>
+                <option>天津师范大学</option>
+            </datalist>
+            <br>
+            入学成绩<input  type="number"  name="grade" min="1" step="1"/>
+            <br>
+            入学时间<input type="date" name="time" />
+        </fieldset>
+        <br>
+        <input type="submit" />
+    </form>
+</body>
+</html>
