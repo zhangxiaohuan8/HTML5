@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+        #input{
+             width: 200px;
+             height: 30px;
+             border-color: orange;
+         }
+         #button{
+            width: 100px;
+             height: 30px;
+         }
+         .lishi{
+            background:silver;
+            float: left;
+            margin-right: 20px;
+            margin-top: 20px;
+         }
+         #p{
+             font-size: 20px;
+             color:slategrey;
+         }
+    </style>
+	<script>
+        var hisItem; 
+        var hisItem;
+        hisTime = []; 
+        hisItem = []; 
+        function saveStorage(id) {
+            var data = document.getElementById(id).value;
+            var time = new Date().toLocaleString();
+            for(var i = localStorage.length; i < localStorage.length+1; i++){
+                hisTime[i]=time;
+            }
+            console.log(hisTime);
+            localStorage.setItem(time,data);
+            loadStorage('history');
+        }
+        function loadStorage(id) {
+            for (var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                var value = localStorage.getItem(key);
+                hisItem[i]=localStorage.getItem(key);
+            }
+            var target = document.getElementById(id);
+            var div = document.createElement("div");
+            target.insertBefore(div,target.children[0]);
+            for(var i =0;i<localStorage.length; i++){
+                div.innerHTML="<div class='lishi'>"+hisItem[i]+"</div>";
+            }
+            console.log(hisItem);
+        }
+        function text(){
+            for (var i = 0; i < localStorage.length; i++) {
+                var key = localStorage.key(i);
+                var value = localStorage.getItem(key);
+                hisItem[i]=localStorage.getItem(key);
+            }
+            var target = document.getElementById('history');
+            var div = document.createElement("div");
+            target.appendChild(div);
+            for(var i =localStorage.length-1;i>=0; i--){
+                div.innerHTML+="<div class='lishi'>"+hisItem[i]+"</div>";
+            }
+        }
+        function clearStorage(id) {
+            localStorage.clear();
+            hisItem = [];
+            var target = document.getElementById(id);
+            target.innerHTML=" ";
+            loadStorage('history');
+        }
+	</script>
+</head>
+<body onload="text()">
+    <input type="search" placeholder="请输入想查找的商品" id="input">
+    <input type="button" value="搜索" id="button" onclick="saveStorage('input')">
+    <br>
+    最近搜索
+    <div id="history">
+    </div>
+    <br>
+    <p id="p" onclick="clearStorage('history');">X</p>
+</body>
+</html>
