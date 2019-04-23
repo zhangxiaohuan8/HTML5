@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		.a{
+			width: 199px;
+			height: 69px;
+			font-size: 20px;
+			color: red;
+			text-align: center;
+			position: absolute;
+			padding-top: 30px;
+			border: 1px solid gray;
+		}
+		#canvas{
+      position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<div class="a">一等奖</div>
+	<canvas id="canvas"></canvas>
+</body>
+<script>
+	var canvas=document.getElementById('canvas');
+  var ctx=canvas.getContext('2d');
+	canvas.width=200;    
+  canvas.height=100;   
+  ctx.beginPath();   
+  ctx.fillStyle="gray";
+  ctx.fillRect(0,0,200,100);
+  ctx.closePath();
+  ctx.globalCompositeOperation="destination-out";   
+	canvas.addEventListener('mousedown',down);
+	canvas.addEventListener('mousedown',move);
+	canvas.addEventListener('mouseup',clear);
+	function down(e){
+		var x=e.clientX-canvas.offsetLeft;
+  	var y=e.clientY-canvas.offsetTop;
+  	ctx.moveTo(x,y)
+  	canvas.addEventListener('mousemove',move);
+	}
+	function clear(){
+		clear1();
+    canvas.removeEventListener('mousemove',move);
+	}
+	function move(e){                 
+    var x=e.clientX-canvas.offsetLeft;
+    var y=e.clientY-canvas.offsetTop;
+		ctx.beginPath();
+		ctx.fillStyle = "#ffffff";
+		ctx.arc(x,y,20,0,2*Math.PI);
+    ctx.closePath();
+		ctx.fill();
+		clear1();
+  }
+  function clear1(){              
+  	var data=ctx.getImageData(0,0,200,100).data;   
+    for(var i=0,j=0;i<data.length;i+=4){  
+      if(data[i]&&data[i+1]&&data[i+2]&&data[i+3]){       
+      	j++;
+    	}
+  	}
+  	if(j<=200*100*0.15){          
+  		ctx.clearRect(0,0,200,100);
+  	}
+  }
+</script>
+</html>
